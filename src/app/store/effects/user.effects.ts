@@ -1,23 +1,24 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of } from "rxjs";
 import { UsersService } from "src/app/services/users.service";
-import { loadUsers, loadUsersError, loadUsersSuccess } from '../actions/'
+import { loadUserById, loadUserByIdError, loadUserByIdSuccess } from '../actions/'
 
 
 const cache = new Map();
 
 @Injectable()
-export class UsersEffects {
-  loadUsers$ =
+export class UserEffects {
+  loadUserById$ =
     createEffect(
       () => this.actions$.pipe(
-        ofType(loadUsers),
-        mergeMap(() => this.usersService.getAll()
+        ofType(loadUserById),
+        mergeMap((action) => this.usersService.getById(action.id)
           .pipe(
-            map(({ data }) => loadUsersSuccess({ payload: data })),
-            catchError((err: HttpErrorResponse) => of(loadUsersError({ payload: err.message })))
+            map(({ data }) => loadUserByIdSuccess({ payload: data })),
+            catchError((err: HttpErrorResponse) => of(loadUserByIdError({ payload: err.message })))
           )
         )
       )

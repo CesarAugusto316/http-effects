@@ -20,11 +20,11 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<RestApi<User[]>>(`${this.baseUrl}`)
+    return this.http.get<RestApi<User[]>>(`${this.baseUrl}?delay=1`)
   }
 
   getById(id: number) {
-    return this.http.get<RestApi<User>>(`${this.baseUrl}/${id}`)
+    return this.http.get<RestApi<User>>(`${this.baseUrl}/${id}?delay=1`)
   }
 
   create(user: User) {

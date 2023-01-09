@@ -1,1 +1,2 @@
-export { State, usersReducer } from '../reducers/users.reducer';
+export { UsersState, usersReducer } from './users.reducer';
+export { UserState, userReducer } from './user.reducer';
