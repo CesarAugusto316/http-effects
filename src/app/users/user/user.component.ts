@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { AppState } from 'src/app/store/app.reducer';
 import * as userActions from '../../store/actions'
 
@@ -12,6 +12,7 @@ import * as userActions from '../../store/actions'
 })
 export class UserComponent implements OnInit, OnDestroy {
   paramSubs!: Subscription
+  user$ = this.store.select('user').pipe(map(({ user }) => user));
 
   constructor(
     private router: ActivatedRoute,
@@ -20,8 +21,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.paramSubs = this.router.params.subscribe(({ id }) => {
-      console.log(id);
-
       this.store.dispatch(userActions.loadUserById({ id }))
     })
   }

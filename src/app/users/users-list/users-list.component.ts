@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import * as usersActions from '../../store/actions/index';
+import { Router } from '@angular/router';
 // import { User } from 'src/app/models/user.model';
 
 
@@ -18,7 +19,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
   error$ = this.store.select('users').pipe(map(({ error }) => error));
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,5 +28,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+  }
+
+  onGoto(id: number) {
+    this.router.navigateByUrl('user/' + id)
   }
 }

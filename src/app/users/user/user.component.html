@@ -1,1 +1,17 @@
-<p>user works!</p>
+<h2>user</h2>
+<div class="container-fluid" *ngIf="user$ | async as user">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top" [src]="user.avatar" [alt]="user.first_name" />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ user.first_name }}
+          </h5>
+          <p class="card-text">{{ user.last_name }}</p>
+          <p class="card-text">{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

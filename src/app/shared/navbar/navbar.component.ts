@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { AppState } from 'src/app/store/app.reducer';
 
 
 @Component({
@@ -7,8 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
+  id$ = this.store.select('user').pipe(map((value) => value.id))
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<AppState>) { }
 
   onGotoUser(value: string) {
     if (value) {

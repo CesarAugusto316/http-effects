@@ -19,7 +19,7 @@
           <a class="nav-link" aria-current="page" routerLink="/home"> Home </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/user/1"> User </a>
+          <a class="nav-link" [routerLink]="'user/' + (id$ | async)"> User </a>
         </li>
       </ul>
       <div class="d-flex" role="search">

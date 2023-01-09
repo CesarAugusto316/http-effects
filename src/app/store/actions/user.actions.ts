@@ -2,6 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
 
 
+export const resetUserById = createAction(
+  '[User Component] loadUser byID', props<{ id: number }>()
+);
+
 export const loadUserById = createAction(
   '[User Component] loadUser byID', props<{ id: number }>()
 );

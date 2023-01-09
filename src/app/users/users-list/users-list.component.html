@@ -20,10 +20,12 @@
           <img
             class="card-img-top"
             [src]="user.avatar"
-            [alt]="user.firs_name"
+            [alt]="user.first_name"
           />
           <div class="card-body">
-            <h5 class="card-title">{{ user.firs_name }}</h5>
+            <h5 class="card-title" (click)="onGoto(user.id)">
+              {{ user.first_name }}
+            </h5>
             <p class="card-text">{{ user.last_name }}</p>
             <p class="card-text">{{ user.email }}</p>
             <p class="card-text">
