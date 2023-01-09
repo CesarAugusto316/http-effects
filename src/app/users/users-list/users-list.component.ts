@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, } from 'rxjs';
+
+// ngrx/store
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
+import * as usersActions from '../../store/actions/index';
 import { User } from 'src/app/models/user.model';
-import { UsersService } from 'src/app/services/users.service';
 
 
 @Component({
@@ -9,21 +13,24 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './users-list.component.html',
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-  usersList$!: Observable<User[]>;
-  userSubs!: Subscription;
+  users =
+    this.store.select('users').pipe(map(({ users }) => users))
+  usersSubs!: Subscription;
 
-  constructor(private usersService: UsersService) {
-    this.usersList$ = usersService.getAll().pipe(map(({ data }) => data))
-  }
+  constructor(
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit(): void {
-    // this.userSubs = this.usersService.getAll()
-    //   .subscribe(({ data }) => {
-    //     this.usersList = data;
-    //   })
+    // this.usersSubs = this.store.select('users').subscribe(({ users }) => {
+    //   this.users = users
+    // })
+    // if (!this.users.length) {
+    // }
+    this.store.dispatch(usersActions.loadUsers())
   }
 
   ngOnDestroy(): void {
-    // this.userSubs.unsubscribe()
+    // this.users.
   }
 }

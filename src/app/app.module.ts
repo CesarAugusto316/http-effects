@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,13 +8,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
-// import { ObjectoArrayPipe } from './pipes/objecto-array.pipe';
+
+// ngrx/store
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducers } from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UsersEffects } from './store/effects/users.effects';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // ObjectoArrayPipe
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,10 @@ import { UsersModule } from './users/users.module';
     // feature modules
     AppRoutingModule,
     SharedModule,
-    UsersModule
+    UsersModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([UsersEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

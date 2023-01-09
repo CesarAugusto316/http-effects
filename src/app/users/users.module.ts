@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserComponent } from './user/user.component';
-import { ObjectoArrayPipe } from '../pipes/objecto-array.pipe';
 
 
 
@@ -10,7 +9,6 @@ import { ObjectoArrayPipe } from '../pipes/objecto-array.pipe';
   declarations: [
     UsersListComponent,
     UserComponent,
-    ObjectoArrayPipe
   ],
   imports: [
     CommonModule
