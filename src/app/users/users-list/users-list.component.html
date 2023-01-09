@@ -1,0 +1,20 @@
+<h2 class="p-4">users-list works!</h2>
+
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let user of usersList$ | async">
+      <div class="card h-100">
+        <img class="card-img-top" [src]="user.avatar" [alt]="user.firs_name" />
+        <div class="card-body">
+          <h5 class="card-title">{{ user.firs_name }}</h5>
+          <p class="card-text">{{ user.last_name }}</p>
+          <p class="card-text">{{ user.email }}</p>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural
+            lead-in to additional content.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
